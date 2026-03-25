@@ -15,11 +15,11 @@ Proje kapsamında entegre edilen 10 adet API ve görevleri aşağıdadır:
 | **Kripto Para** | `coinranking1.p.rapidapi.com` | Güncel kripto para fiyatları ve piyasa verileri. |
 | **Döviz Kurları** | `exchange-rates7.p.rapidapi.com` | Anlık döviz kuru değişimleri. |
 | **Yemek Tarifi** | `tasty.p.rapidapi.com` | Günün yemek önerisi ve tarif detayları. |
-| **Futbol** | `football-prediction-api.p.rapidapi.com` | Güncel futbol maç sonuçları ve analizleri. |
+| **Futbol** | `football-prediction-api.p.rapidapi.com` | Seçilen tarihe göre futbol maç sonuçları. |
 | **Akaryakıt** | `uk-daily-fuel-prices.p.rapidapi.com` | Güncel akaryakıt fiyat verileri. |
 | **Film** | `imdb236.p.rapidapi.com` | Günün en popüler filmleri (IMDb verileri). |
 | **Müzik** | `spotify23.p.rapidapi.com` | Günün en çok dinlenen şarkıları. |
-| **Haberler** | `real-time-news-data.p.rapidapi.com` | 3 adet güncel haber başlığı ve içeriği. |
+| **Haberler** | `real-time-news-data.p.rapidapi.com` | Güncel haber başlığı ve içeriği. |
 | **Motivasyon** | `quotes-api12.p.rapidapi.com` | Günün motivasyon sözü. |
 | **Hava Durumu** | `open-weather13.p.rapidapi.com` | Güncel hava durumu verileri. |
 
