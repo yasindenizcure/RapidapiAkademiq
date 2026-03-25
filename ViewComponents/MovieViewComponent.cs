@@ -6,17 +6,22 @@ namespace RapidApiAkademiq.ViewComponents
 {
     public class MovieViewComponent: ViewComponent
     {
+        private readonly IConfiguration _configuration;
+        public MovieViewComponent(IConfiguration configuration) => _configuration = configuration;
         public async Task<IViewComponentResult> InvokeAsync() 
         {
+            var apiKey = _configuration["RapidApiConfig:ApiKey"];
+            var host = _configuration["RapidApiConfig:Hosts:Movie"];
+
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://imdb236.p.rapidapi.com/api/imdb/most-popular-movies"),
+                RequestUri = new Uri($"https://{host}/api/imdb/most-popular-movies"),
                 Headers =
     {
-        { "x-rapidapi-key", "128bd94e78msh8a7d11cb52bce26p11b9f4jsn6129c3707d09" },
-        { "x-rapidapi-host", "imdb236.p.rapidapi.com" },
+        { "x-rapidapi-key", apiKey },
+        { "x-rapidapi-host", host },
     },
             };
             var response = await client.SendAsync(request);

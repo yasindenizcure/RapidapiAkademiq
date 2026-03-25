@@ -6,17 +6,22 @@ namespace RapidApiAkademiq.ViewComponents
 {
     public class GasViewComponent: ViewComponent
     {
+        private readonly IConfiguration _configuration;
+        public GasViewComponent(IConfiguration configuration) => _configuration = configuration;
         public async Task<IViewComponentResult> InvokeAsync() 
         {
+            var apiKey = _configuration["RapidApiConfig:ApiKey"];
+            var host = _configuration["RapidApiConfig:Hosts:Fuel"];
+
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://uk-daily-fuel-prices.p.rapidapi.com/api/petrol-prices/updates"),
+                RequestUri = new Uri($"https://{host}/api/petrol-prices/updates"),
                 Headers =
     {
-        { "x-rapidapi-key", "128bd94e78msh8a7d11cb52bce26p11b9f4jsn6129c3707d09" },
-        { "x-rapidapi-host", "uk-daily-fuel-prices.p.rapidapi.com" },
+        { "x-rapidapi-key", apiKey },
+        { "x-rapidapi-host", host },
     },
             };
 

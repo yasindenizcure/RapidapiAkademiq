@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RapidApiAkademiq")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a716d3bf0c052f2f41362acb6b2f4606df63587c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2032a2ac10158e7a38e9d72cfd93918fc9832a7")]
 [assembly: System.Reflection.AssemblyProductAttribute("RapidApiAkademiq")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RapidApiAkademiq")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

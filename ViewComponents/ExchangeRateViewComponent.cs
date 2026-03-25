@@ -6,18 +6,22 @@ namespace RapidApiAkademiq.ViewComponents
 {
     public class ExchangeRateViewComponent : ViewComponent
     {
+        private readonly IConfiguration _configuration;
+        public ExchangeRateViewComponent(IConfiguration configuration) => _configuration = configuration;
         public async Task<IViewComponentResult> InvokeAsync()
-
         {
+            var apiKey = _configuration["RapidApiConfig:ApiKey"];
+            var host = _configuration["RapidApiConfig:Hosts:Currency"];
+
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://exchange-rates7.p.rapidapi.com/latest?base=USD"),
+                RequestUri = new Uri($"https://{host}/latest?base=USD"),
                 Headers =
     {
-        { "x-rapidapi-key", "128bd94e78msh8a7d11cb52bce26p11b9f4jsn6129c3707d09" },
-        { "x-rapidapi-host", "exchange-rates7.p.rapidapi.com" },
+        { "x-rapidapi-key", apiKey },
+        { "x-rapidapi-host", host },
     },
             };
             var response = await client.SendAsync(request);

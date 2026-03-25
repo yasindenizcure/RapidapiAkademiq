@@ -1,0 +1,12 @@
+# Visual Studio Geçici Dosyaları
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+
+# API Key Gizleme (Senin Bonus Maddesi)
+appsettings.json
+
+# Örnek Dosya (GitHub'da yapının görünmesi için bunu gönderebilirsin)
+!appsettings.Example.json
