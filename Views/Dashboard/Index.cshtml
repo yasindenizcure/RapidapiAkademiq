@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Genel Bakış";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-white" style="background: linear-gradient(90deg, #009ef7, #00baff);">
+                <h2 class="fw-bold">Merhaba, Akademiq Paneline Hoş Geldin! 🚀</h2>
+                <p class="mb-0">Tüm canlı veriler sol menüde seni bekliyor. İstediğin kategoriye tıklayarak detaylı analizleri görebilirsin.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary-subtle text-primary p-3 rounded-3 me-3">
+                        <i class="bi bi-lightning-charge-fill fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Kripto Piyasası</h6>
+                        <small>Bitcoin ve altcoin takibi</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+                <div class="d-flex align-items-center text-success">
+                    <div class="bg-success-subtle p-3 rounded-3 me-3">
+                        <i class="bi bi-graph-up-arrow fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Döviz Kurları</h6>
+                        <small>Anlık kur değişimleri</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+                <div class="d-flex align-items-center text-danger">
+                    <div class="bg-danger-subtle p-3 rounded-3 me-3">
+                        <i class="bi bi-heart-pulse-fill fs-3"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Günün Menüsü</h6>
+                        <small>Yeni tarifler eklendi</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center text-muted">
+        <p class="small">© 2026 Akademiq Dashboard - Veriler RapidAPI üzerinden anlık sağlanmaktadır.</p>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+﻿@model RapidApiAkademiq.Models.MusicViewModel.Rootobject
+
+@{
+    Layout = null;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<style>
+    body {
+        background-color: #121212;
+        color: white;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .card {
+        background-color: #181818;
+        color: white;
+        border: none;
+        border-radius: 12px;
+    }
+
+    .track-row {
+        transition: 0.2s;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+        .track-row:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            cursor: pointer;
+        }
+
+    /* Sayıların silikliği için düzeltme */
+    .track-number {
+        color: #b3b3b3; /* Tam gri yerine Spotify'ın kullandığı belirgin gri */
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .track-row:hover .track-number {
+        color: #1DB954; /* Üzerine gelince yeşil olsun (Opsiyonel) */
+    }
+
+    .img-track {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+
+    .text-spotify {
+        color: #1DB954;
+    }
+
+    /* Tablo başlıkları */
+    .table thead th {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold mb-0 text-spotify"><i class="bi bi-spotify me-2"></i>Müzik Analizi</h2>
+            <p class="text-white-50">En çok dinlenenler ve istatistikler</p>
+        </div>
+        <span class="badge bg-dark border border-secondary p-2">Toplam @Model.tracks.totalCount Sonuç</span>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-transparent border-0 py-3">
+                    <h5 class="card-title mb-0 fw-bold">Popüler Parçalar</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-hover mb-0 border-0">
+                        <thead>
+                            <tr class="text-white-50">
+                                <th class="ps-4" style="width: 50px;">#</th>
+                                <th>Başlık</th>
+                                <th>Albüm</th>
+                                <th class="text-end pe-4"><i class="bi bi-clock"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int count = 1;
+                            }
+                            @foreach (var track in Model.tracks.items)
+                            {
+                                <tr class="track-row align-middle border-0">
+                                    @* text-muted yerine track-number sınıfı verdik *@
+                                    <td class="ps-4 track-number">@count</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="@track.data.albumOfTrack.coverArt.sources.FirstOrDefault()?.url" class="img-track me-3 shadow">
+                                            <div>
+                                                <div class="fw-bold text-white">@track.data.name</div>
+                                                <div class="small text-white-50">@track.data.artists.items.FirstOrDefault()?.profile.name</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-white-50 small">@track.data.albumOfTrack.name</td>
+                                    <td class="text-end pe-4 text-white-50 small">
+                                        @{
+                                            var minutes = track.data.duration.totalMilliseconds / 60000;
+                                            var seconds = (track.data.duration.totalMilliseconds % 60000) / 1000;
+                                        }
+                                        @minutes:@seconds.ToString("D2")
+                                    </td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-transparent border-0 py-3">
+                    <h5 class="card-title mb-0 fw-bold">Öne Çıkan Sanatçılar</h5>
+                </div>
+                <div class="card-body">
+                    @foreach (var artist in Model.artists.items.Take(5))
+                    {
+                        <div class="d-flex align-items-center mb-3 p-2 rounded-3 hover-effect">
+                            <img src="@artist.data.visuals?.avatarImage?.sources.FirstOrDefault()?.url"
+                                 class="rounded-circle me-3" style="width: 45px; height: 45px; object-fit: cover; border: 2px solid #282828;">
+                            <div>
+                                <div class="fw-bold">@artist.data.profile.name</div>
+                                <div class="text-white-50 small">Sanatçı</div>
+                            </div>
+                            <i class="bi bi-patch-check-fill text-info ms-auto"></i>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card shadow" style="background: linear-gradient(180deg, #1DB954 0%, #191414 100%); color: white;">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-graph-up-arrow fs-1 mb-2"></i>
+                    <h4 class="fw-bold">Trend Raporu</h4>
+                    <p class="small opacity-75">Bu haftanın en çok aranan müzik türü ve sanatçı analizi hazır.</p>
+                    <button class="btn btn-light btn-sm fw-bold rounded-pill px-4 mt-2">Detayları Gör</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

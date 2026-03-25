@@ -1,0 +1,26 @@
+﻿@model RapidApiAkademiq.Models.ExchangeRateViewModel.Rootobject
+
+<div class="card shadow-sm border-0 h-100">
+    <div class="card-header bg-success text-white fw-bold">
+        <i class="bi bi-currency-exchange me-2"></i> Güncel Döviz Kurları
+    </div>
+    <div class="card-body p-0" style="max-height: 400px; overflow-y: auto;">
+        <table class="table table-hover mb-0">
+            <thead class="table-light sticky-top">
+                <tr>
+                    <th>Birim</th>
+                    <th class="text-end">Değer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.rates)
+                {
+                    <tr>
+                        <td><strong>@item.Key</strong></td>
+                        <td class="text-end text-success fw-bold">@item.Value.ToString("N4")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

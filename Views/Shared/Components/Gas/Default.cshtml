@@ -1,0 +1,55 @@
+﻿@model RapidApiAkademiq.Models.GasViewModel.Rootobject
+
+<div class="card shadow-sm border-0 h-100">
+    <div class="card-header bg-dark text-white fw-bold d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-fuel-pump-fill me-2"></i> Akaryakıt Güncelleme Durumu</span>
+        <span class="badge bg-secondary">@DateTime.Now.ToString("dd.MM.yyyy")</span>
+    </div>
+    <div class="card-body p-0">
+        @if (Model?.updates != null && Model.updates.Any())
+        {
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light sticky-top">
+                        <tr>
+                            <th>Marka / İstasyon</th>
+                            <th>Son Güncelleme</th>
+                            <th class="text-center">Veri Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.updates)
+                        {
+                            <tr>
+                                <td class="fw-bold text-dark">
+                                    <i class="bi bi-tag-fill text-primary me-1"></i> @item.brand
+                                </td>
+                                <td>
+                                    <small class="text-muted">@item.last_updated</small>
+                                </td>
+                                <td class="text-center">
+                                    @if (item.data_freshness == "fresh")
+                                    {
+                                        <span class="badge rounded-pill bg-success">Güncel</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill bg-warning text-dark">@item.data_freshness</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="p-5 text-center text-muted">
+                <i class="bi bi-exclamation-triangle fs-1 d-block mb-3 text-warning"></i>
+                <p class="mb-0">Gösterilecek akaryakıt güncelleme verisi bulunamadı.</p>
+                <small>Lütfen API anahtarınızı veya bağlantınızı kontrol edin.</small>
+            </div>
+        }
+    </div>
+</div>

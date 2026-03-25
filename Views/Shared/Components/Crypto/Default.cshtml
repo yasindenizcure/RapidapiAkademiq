@@ -1,0 +1,78 @@
+﻿@model RapidApiAkademiq.Models.CryptoViewModel.Rootobject
+@using System.Globalization
+
+<div class="card shadow-sm border-0 h-100">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <span class="fw-bold"><i class="bi bi-currency-bitcoin me-2"></i>Kripto Piyasası</span>
+        @if (Model?.data?.stats != null)
+        {
+            <small class="badge bg-light text-primary">
+                @Model.data.stats.totalCoins.ToString("N0") Coin
+            </small>
+        }
+    </div>
+
+    <div class="card-body p-0">
+        @if (Model?.data?.stats != null)
+        {
+            <div class="row g-0 text-center border-bottom bg-light">
+                <div class="col-6 py-2 border-end">
+                    <small class="text-muted d-block small-text">Market Cap</small>
+                    <span class="fw-bold small">@double.Parse(Model.data.stats.totalMarketCap ?? "0", CultureInfo.InvariantCulture).ToString("C0", new CultureInfo("tr-TR"))</span>
+                </div>
+                <div class="col-6 py-2">
+                    <small class="text-muted d-block small-text">24s Hacim</small>
+                    <span class="fw-bold small">@double.Parse(Model.data.stats.total24hVolume ?? "0", CultureInfo.InvariantCulture).ToString("C0", new CultureInfo("tr-TR"))</span>
+                </div>
+            </div>
+        }
+
+        <div style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-hover align-middle mb-0 table-sm">
+                <thead class="table-light sticky-top">
+                    <tr style="font-size: 0.85rem;">
+                        <th class="ps-3">Coin</th>
+                        <th>Fiyat</th>
+                        <th class="text-end pe-3">Değişim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model?.data?.coins != null)
+                    {
+                        foreach (var coin in Model.data.coins.Take(10))
+                        {
+                            <tr style="font-size: 0.9rem;">
+                                <td class="ps-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@coin.iconUrl" alt="@coin.name" style="width: 20px; height: 20px;" class="me-2" />
+                                        <span class="fw-bold">@coin.symbol</span>
+                                    </div>
+                                </td>
+                                <td>$@decimal.Parse(coin.price ?? "0", CultureInfo.InvariantCulture).ToString("N2")</td>
+                                <td class="text-end pe-3">
+                                    @{
+                                        var change = decimal.Parse(coin.change ?? "0", CultureInfo.InvariantCulture);
+                                        var colorClass = change >= 0 ? "text-success" : "text-danger";
+                                    }
+                                    <span class="@colorClass fw-bold" style="font-size: 0.8rem;">
+                                        @(change >= 0 ? "+" : "")@coin.change%
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer bg-white border-0 text-center">
+        <a href="/Crypto/Index" class="btn btn-link btn-sm text-decoration-none p-0">Tümünü Gör</a>
+    </div>
+</div>
+
+<style>
+    .small-text {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+    }
+</style>

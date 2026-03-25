@@ -1,0 +1,111 @@
+﻿@model RapidApiAkademiq.Models.FootballViewModel.Rootobject
+
+<div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100">
+    <div class="card-body bg-white pb-0">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0 text-dark">
+                <i class="bi bi-trophy text-primary me-2"></i>Maç Sonuçları
+            </h6>
+            <span class="badge rounded-pill bg-light text-primary border px-3">Bugün</span>
+        </div>
+    </div>
+
+    <div class="card-body p-0" style="max-height: 450px; overflow-y: auto;">
+        @if (Model?.data != null && Model.data.Any())
+        {
+            foreach (var match in Model.data)
+            {
+                <div class="px-4 py-3 border-bottom hover-bg-light transition">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted" style="font-size: 0.75rem;">@match.competition_name</span>
+                        <span class="text-muted" style="font-size: 0.75rem;">@match.start_date.ToString("HH:mm")</span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="flex-grow-1 text-end pe-2">
+                            <span class="fw-semibold small text-dark">@match.home_team</span>
+                        </div>
+
+                        <div class="px-3 py-1 rounded-3 bg-dark text-white fw-bold shadow-sm mx-2" style="min-width: 60px; text-align: center;">
+                            @(string.IsNullOrEmpty(match.result) ? "vs" : match.result)
+                        </div>
+
+                        <div class="flex-grow-1 text-start ps-2">
+                            <span class="fw-semibold small text-dark">@match.away_team</span>
+                        </div>
+                    </div>
+
+                    @if (match.status != "finished")
+                    {
+                        <div class="text-center mt-2" style="font-size: 0.7rem;">
+                            <span class="text-danger fw-bold">
+                                <span class="dot-pulse"></span> CANLI
+                            </span>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <div class="p-5 text-center text-muted">
+                <i class="bi bi-calendar2-x mb-2 d-block h4"></i>
+                <small>Güncel maç bulunmuyor.</small>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Hover Efekti */
+    .hover-bg-light:hover {
+        background-color: #f8f9fa;
+        cursor: default;
+    }
+
+    .transition {
+        transition: background-color 0.2s ease;
+    }
+
+    /* Minimal Canlı Noktası */
+    .dot-pulse {
+        height: 6px;
+        width: 6px;
+        background-color: #dc3545;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 4px;
+        animation: pulse 1.5s infinite;
+    }
+
+    @@keyframes pulse {
+        0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+        }
+
+        70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 5px rgba(220, 53, 69, 0);
+        }
+
+        100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+        }
+    }
+
+    /* Scrollbar Tasarımı */
+    .card-body::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .card-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .card-body::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+</style>

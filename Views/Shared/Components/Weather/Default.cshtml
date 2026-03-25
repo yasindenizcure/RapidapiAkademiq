@@ -1,0 +1,30 @@
+﻿@model RapidApiAkademiq.Models.WeatherViewModel.Rootobject
+@using System.Globalization
+
+<div class="card shadow-sm border-0 h-100 text-white" style="background: linear-gradient(135deg, #00b4db, #0083b0);">
+    <div class="card-body text-center">
+        <h5 class="fw-bold text-uppercase mb-0">@Model.city.name</h5>
+        <small>@DateTime.Now.ToString("dd MMMM yyyy", new CultureInfo("tr-TR"))</small>
+        
+        @if(Model.list != null && Model.list.Any())
+        {
+            var current = Model.list.First();
+            <div class="my-3">
+                <img src="https://openweathermap.org/img/wn/@(current.weather[0].icon)@@2x.png" style="width: 80px;" />
+                <h1 class="display-4 fw-bold mb-0">@Math.Round(current.main.temp - 273.15)°C</h1>
+                <p class="text-capitalize">@current.weather[0].description</p>
+            </div>
+            
+            <div class="row border-top pt-3 g-0">
+                <div class="col-6 border-end">
+                    <small class="d-block text-white-50">Nem</small>
+                    <strong>%@current.main.humidity</strong>
+                </div>
+                <div class="col-6">
+                    <small class="d-block text-white-50">Rüzgar</small>
+                    <strong>@current.wind.speed km/s</strong>
+                </div>
+            </div>
+        }
+    </div>
+</div>
